@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tạo mã QR thiệp cưới</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+body{margin:0;min-height:100vh;padding:24px 16px;font-family:system-ui,sans-serif;background:#7a1620;color:#5e0f17}
+[hidden]{display:none!important}
+.box{max-width:420px;margin:0 auto;background:#fbf3e4;border-radius:14px;padding:20px;text-align:center}
+h2{margin:0 0 14px;font-size:20px}
+input{width:100%;padding:12px;font-size:16px;border:1px solid #c9a0a0;border-radius:8px}
+button,.btn{display:block;width:100%;margin-top:12px;padding:12px;font-size:16px;border:0;border-radius:8px;background:#8a1c24;color:#fff;text-decoration:none;box-sizing:border-box}
+#qr{margin:20px auto 0;width:256px;height:256px}
+#qr img,#qr canvas{margin:0 auto}
+</style>
+</head>
+<body>
+<div class="box">
+  <h2>Tạo mã QR cho thiệp</h2>
+  <input id="url" type="url" placeholder="Dán link thiệp (https://...)">
+  <button id="go">Tạo mã QR</button>
+  <div id="qr"></div>
+  <a id="dl" class="btn" download="qr-thiep-cuoi.png" hidden>Tải ảnh QR</a>
+</div>
+<script>
+const go = document.getElementById("go");
+const input = document.getElementById("url");
+const qr = document.getElementById("qr");
+const dl = document.getElementById("dl");
+
+go.onclick = () => {
+  const link = input.value.trim();
+  if (!link) return;
+  qr.innerHTML = "";
+  new QRCode(qr, {
+    text: link,
+    width: 256,
+    height: 256,
+    colorDark: "#5e0f17",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  dl.href = qr.querySelector("canvas").toDataURL("image/png");
+  dl.hidden = false;
+};
+</script>
+</body>
+</html>
