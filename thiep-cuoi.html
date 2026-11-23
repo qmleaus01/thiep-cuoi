@@ -111,7 +111,7 @@ body:not(.music-on) #music{opacity:.65}
   <div class="flap bottom"><i></i></div>
   <div class="flap left"><i></i></div>
   <div class="flap right"><i></i></div>
-  <div class="seal" aria-hidden="true"><span id="mono"></span></div>
+  <div class="seal" aria-hidden="true"><span></span></div>
 </div>
 
 <main>
@@ -139,7 +139,6 @@ body:not(.music-on) #music{opacity:.65}
 <script>
 /* ===== CHỈNH NỘI DUNG Ở ĐÂY ===== */
 const CONFIG = {
-  couple: "Tên cô dâu & Tên chú rể", // chỉ dùng cho chữ cái trên con dấu và tên tab
   music: "nhac.mp3", // đặt file nhạc cạnh file này; để "" nếu không dùng nhạc
   to: "Hello, xin là xin chúc mừng gia đình nhé.",
   message: [
@@ -181,11 +180,6 @@ const photoBox = p => {
 };
 
 function render() {
-  const [n1, n2 = ""] = CONFIG.couple.split("&").map(s => s.trim());
-  const initial = s => (s.split(/\s+/).pop() || "").charAt(0).toUpperCase();
-  document.title = "Thiệp cưới · " + CONFIG.couple;
-  $("#mono").textContent = n2 ? initial(n1) + "&" + initial(n2) : initial(n1);
-
   const letter = $("#letter");
   $("#to").textContent = CONFIG.to;
   CONFIG.message.forEach(t => letter.append(mk("p", "msg rv", t)));
