@@ -66,15 +66,19 @@ section{padding:72px 24px;text-align:center}
 .ph::before{content:"thêm ảnh";font-style:italic;color:#8d7b68}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(.96)}
 
+/* sticker cắt dán, màu nhám cho hợp nền */
+section{position:relative}
+.stk{position:absolute;z-index:2;height:auto;pointer-events:none;filter:saturate(.8) contrast(.94) brightness(.97) drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+
 /* lời chúc: phần đầu tiên hiện ra sau phong bì */
-.letter{padding-top:96px}
+.letter{padding-top:96px;padding-bottom:150px}
 .letter .to{font-style:italic;font-weight:500;font-size:22px;margin-bottom:14px}
 .letter .msg{margin:0 0 16px;text-align:left}
 .letter .sign{font-family:"Great Vibes",cursive;font-size:38px;line-height:1.2;color:var(--wine);margin-top:8px;text-align:right}
 
 /* kỷ niệm */
 .gallery{display:grid;grid-template-columns:1fr;gap:34px;margin-top:28px}
-.gallery figure{margin:0}
+.gallery figure{margin:0;position:relative}
 .gallery .frame{background:#fbf7f0 var(--grain);padding:10px;box-shadow:0 2px 4px rgba(0,0,0,.12),0 16px 30px -10px rgba(60,15,20,.35)}
 /* hiện trọn ảnh theo tỉ lệ gốc, không cắt */
 .gallery .ph{min-height:220px}
@@ -191,13 +195,40 @@ function render() {
   letter.append(mk("p", "sign rv", "From " + CONFIG.from + "."));
 
   const gallery = $("#gallery");
-  CONFIG.photos.forEach(p => {
+  // mỗi ảnh một sticker ở góc, lặp lại theo thứ tự ghim → trái tim → nơ
+  const corner = [
+    ["pin", { top: "-26px", left: "50%", width: "44px", marginLeft: "-22px" }],
+    ["heart1", { bottom: "-22px", right: "-12px", width: "76px", transform: "rotate(10deg)" }],
+    ["bow-paper", { top: "-28px", left: "-10px", width: "74px", transform: "rotate(-14deg)" }]
+  ];
+  CONFIG.photos.forEach((p, i) => {
     const fig = mk("figure", "rv");
     const frame = mk("div", "frame");
     frame.append(photoBox(p));
     fig.append(frame, mk("figcaption", "", p.caption));
+    stk(fig, ...corner[i % corner.length]);
     gallery.append(fig);
   });
+
+  // sticker quanh tiêu đề và cuối mỗi phần
+  const L = $(".letter"), G = gallery.closest("section");
+  stk(L, "sparkle-paper", { top: "44px", left: "6%", width: "58px", transform: "rotate(-10deg)" });
+  stk(L, "bow", { top: "54px", right: "6%", width: "72px", transform: "rotate(8deg)" });
+  stk(L, "heart-pink", { bottom: "38px", left: "8%", width: "62px", transform: "rotate(-8deg)" });
+  stk(L, "hearts3", { bottom: "30px", right: "8%", width: "92px", transform: "rotate(6deg)" });
+  stk(G, "camera", { top: "46px", left: "6%", width: "70px", transform: "rotate(-10deg)" });
+  stk(G, "sparkle", { top: "58px", right: "8%", width: "44px" });
+  stk(G, "cherry", { bottom: "14px", right: "8%", width: "58px", transform: "rotate(10deg)" });
+}
+
+// sticker trang trí, chỉ để nhìn nên trình đọc màn hình bỏ qua
+function stk(parent, name, style) {
+  const img = mk("img", "stk rv");
+  img.src = "sticker/" + name + ".webp";
+  img.alt = "";
+  img.setAttribute("aria-hidden", "true");
+  Object.assign(img.style, style);
+  parent.append(img);
 }
 
 // Khối nào cuộn tới thì hiện dần lên
