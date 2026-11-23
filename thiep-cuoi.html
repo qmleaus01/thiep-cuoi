@@ -48,9 +48,6 @@ img{max-width:100%}
 .seal span{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;font:27px/1 "Great Vibes",cursive;white-space:nowrap;color:#6e4c17;box-shadow:inset 0 2px 5px rgba(0,0,0,.35),0 1px 0 rgba(255,240,200,.55);text-shadow:0 1px 0 rgba(255,240,200,.5)}
 #envelope:focus-visible .seal{outline:2px solid var(--cream);outline-offset:8px}
 #envelope.open .seal{transform:scale(1.3);opacity:0}
-.env-hint{position:absolute;left:0;right:0;bottom:calc(10% + env(safe-area-inset-bottom));z-index:5;text-align:center;color:var(--cream);font-size:13px;font-weight:600;letter-spacing:.35em;text-transform:uppercase;pointer-events:none;animation:pulse 2.2s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.4}}
-#envelope.open .env-hint{animation:none;opacity:0}
 
 /* ===== Trang thiệp cuộn dọc ===== */
 section{padding:72px 24px;text-align:center}
@@ -113,7 +110,6 @@ body:not(.music-on) #music{opacity:.65}
   <div class="flap left"><i></i></div>
   <div class="flap right"><i></i></div>
   <div class="seal" aria-hidden="true"><span id="mono"></span></div>
-  <p class="env-hint">chạm để mở thiệp</p>
 </div>
 
 <main>
