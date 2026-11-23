@@ -75,8 +75,14 @@ section{padding:72px 24px;text-align:center}
 /* kỷ niệm */
 .gallery{display:grid;grid-template-columns:1fr;gap:34px;margin-top:28px}
 .gallery figure{margin:0}
-.gallery .frame{aspect-ratio:4/5;background:#fbf7f0 var(--grain);padding:10px;box-shadow:0 2px 4px rgba(0,0,0,.12),0 16px 30px -10px rgba(60,15,20,.35)}
+.gallery .frame{background:#fbf7f0 var(--grain);padding:10px;box-shadow:0 2px 4px rgba(0,0,0,.12),0 16px 30px -10px rgba(60,15,20,.35)}
+/* hiện trọn ảnh theo tỉ lệ gốc, không cắt */
+.gallery .ph{min-height:220px}
+.gallery .ph img{position:static;display:block;height:auto}
+.gallery .ph:has(img){min-height:0}
+.gallery .ph:has(img)::before{display:none}
 .gallery figcaption{margin-top:12px;font-style:italic;font-weight:500}
+.gallery figcaption:empty{display:none}
 @media (min-width:600px){.gallery{grid-template-columns:1fr 1fr}}
 
 /* hiện dần khi cuộn tới */
@@ -147,9 +153,8 @@ const CONFIG = {
   from: "maile with nothing", // chữ ký: "From maile with nothing."
   photos: [
     // Đặt ảnh vào thư mục "anh" cạnh file này. Thêm bao nhiêu ảnh cũng được, mỗi dòng một ảnh.
-    { src: "anh/1.jpg", caption: "Ngày đầu gặp nhau" },
-    { src: "anh/2.jpg", caption: "Chuyến đi đầu tiên" },
-    { src: "anh/3.jpg", caption: "Hai đứa mình" }
+    { src: "anh/1.jpg", caption: "" },
+    { src: "anh/2.jpg", caption: "" }
   ]
 };
 /* ================================= */
