@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#7e1420">
 <title>Thiệp mừng cưới</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --env:#581a21;--red:#8a1520;--ink:#8b1e2a;--paper:#f3ede2;--cream:#e8d9c3;
+  --env:#581a21;--red:#8a1520;--ink:#8b1e2a;--text:#4a1a1f;--paper:#f3ede2;--cream:#e8d9c3;
   /* vân nhám phủ mờ */
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .22 0 0 0 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--red) var(--grain);color:var(--ink);font-family:"Dancing Script",cursive;overflow-x:hidden}
+body{background:var(--red) var(--grain);color:var(--ink);font-family:"Cormorant Garamond",Georgia,serif;overflow-x:hidden}
 body.locked{overflow:hidden;height:100svh}
 [hidden]{display:none!important}
 p{margin:0}
@@ -51,27 +51,28 @@ p{margin:0}
 /* ===== Tờ thư trên nền đỏ, như mẫu ===== */
 main{padding:52px 14px 130px}
 .board{--bw:min(440px,calc(100vw - 28px));--pt:calc(var(--bw) * .82 - 80px);position:relative;width:var(--bw);margin:0 auto}
-/* dải ảnh photobooth gắn ở đầu trang; chữ bắt đầu ngay dưới dải */
-.strip{position:absolute;z-index:3;margin:0;top:0;left:4%;width:34%;transform:rotate(-4deg);box-shadow:0 2px 3px rgba(0,0,0,.3),0 12px 24px rgba(0,0,0,.4)}
-.strip img{display:block;width:100%;height:auto;filter:saturate(.9) contrast(.96)}
+/* ảnh gắn ở đầu trang (chữ bắt đầu ngay dưới ảnh) và dải ảnh photobooth ở cuối thư */
+.toppic,.strip{position:absolute;z-index:3;margin:0;box-shadow:0 2px 3px rgba(0,0,0,.3),0 12px 24px rgba(0,0,0,.4)}
+.toppic{top:0;left:4%;width:44%;transform:rotate(-4deg)}
+.strip{bottom:-44px;right:5%;width:25%;transform:rotate(5deg)}
+.toppic img,.strip img{display:block;width:100%;height:auto;filter:saturate(.9) contrast(.96)}
 /* tờ giấy xám lót phía sau */
 .under{position:absolute;top:140px;left:9%;right:3%;bottom:40px;background:#cfc8bf var(--grain);transform:translate(8px,10px) rotate(.6deg);box-shadow:0 10px 24px rgba(0,0,0,.35)}
 /* tờ thư kẻ dòng, mép xé */
-.sheet{position:relative;isolation:isolate;margin:110px 3% 0 5%;padding:var(--pt) 20px 230px 24px;font-size:19px;line-height:32px;transform:rotate(-.4deg)}
+.sheet{position:relative;isolation:isolate;margin:110px 3% 0 5%;padding:var(--pt) 20px 250px 24px;color:var(--text);font-size:20px;line-height:32px;transform:rotate(-.4deg)}
 .sheet::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--paper) var(--grain);filter:url(#deckle) drop-shadow(0 8px 18px rgba(0,0,0,.4))}
 /* dòng kẻ nằm lớp riêng để không bị méo theo mép giấy xé */
 .sheet::after{content:"";position:absolute;inset:8px 6px;z-index:-1;background:repeating-linear-gradient(to bottom,transparent 0 31px,rgba(196,90,104,.32) 31px 32px) 0 calc(var(--pt) - 8px)}
-.head{position:absolute;top:calc(var(--pt) / 2 - 56px);right:12px;width:54%;font-size:20px;line-height:1.3;text-align:center;transform:rotate(-6deg)}
+.head{position:absolute;top:calc(var(--pt) / 2 - 56px);right:12px;width:46%;font-size:22px;font-style:italic;font-weight:500;line-height:1.3;text-align:center;transform:rotate(-6deg)}
 .msg{margin:0 0 32px}
-.sign{display:flex;align-items:center;gap:10px;font-size:26px;line-height:1.2;margin-top:6px}
+.sign{display:flex;align-items:center;gap:10px;font-size:28px;font-style:italic;font-weight:500;line-height:1.2;margin-top:6px}
 .sign svg{width:44px;height:56px;flex:none;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round}
 
 /* polaroid */
 .pola{position:absolute;z-index:3;margin:0;background:#f8f6f2 var(--grain);padding:8px 8px 0;box-shadow:0 2px 3px rgba(0,0,0,.25),0 12px 24px rgba(0,0,0,.35)}
 .pola .ph{aspect-ratio:1/1}
 .pola figcaption{height:44px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:500;color:var(--ink)}
-.pola.b1{bottom:-58px;left:26%;width:40%;transform:rotate(-5deg)}
-.pola.b2{bottom:-40px;right:2%;width:37%;transform:rotate(3deg)}
+.pola.b1{bottom:-58px;left:14%;width:44%;transform:rotate(-5deg)}
 
 /* ô ảnh */
 .ph{position:relative;overflow:hidden;background:var(--grain),linear-gradient(145deg,#e4dbcc,#cdbfa9)}
@@ -142,11 +143,11 @@ const CONFIG = {
     "Congrats again, you two. ❤️",
   ],
   from: "maile with nothing", // chữ ký: "From maile with nothing."
-  // ảnh trên cùng đè lên góc thư, hai ảnh dưới chồng ở góc cuối thư
+  // ảnh 1 gắn ở đầu thư; ảnh 2 (polaroid) và ảnh 3 (dải ảnh dọc) chồng ở góc cuối thư
   photos: [
-    { src: "anh/strip.jpg", caption: "" }, // dải ảnh photobooth ở đầu trang
+    { src: "anh/2.jpg", caption: "" },
     { src: "anh/3.jpg", caption: "" },
-    { src: "anh/2.jpg", caption: "" }
+    { src: "anh/strip.jpg", caption: "" }
   ]
 };
 /* ================================= */
@@ -190,29 +191,35 @@ function render() {
   sign.append(mk("span", "", "From " + CONFIG.from + "."));
   sheet.append(sign);
 
-  // ảnh trên cùng có trái tim dán, hai ảnh dưới có nơ
+  // ảnh đầu thư có trái tim dán, dải ảnh cuối thư có nơ
   if (p1) {
-    const strip = mk("figure", "strip rv");
-    const img = mk("img");
-    img.src = p1.src;
-    img.alt = "Dải ảnh photobooth";
-    strip.append(img);
-    stk(strip, "heart-pink", { top: "-26px", left: "30%", width: "54px", transform: "rotate(-8deg)" });
-    board.append(strip);
-    // chữ bắt đầu ngay dưới dải ảnh, làm tròn theo dòng kẻ 32px để chữ vẫn nằm trên dòng
+    const top = plainPhoto(p1, "toppic");
+    stk(top, "heart-pink", { top: "-26px", left: "30%", width: "54px", transform: "rotate(-8deg)" });
+    board.append(top);
+    // chữ bắt đầu ngay dưới ảnh, làm tròn theo dòng kẻ 32px để chữ vẫn nằm trên dòng
     const fitTop = () => {
-      const below = strip.offsetTop + strip.offsetHeight - sheet.offsetTop + 16;
+      const below = top.offsetTop + top.offsetHeight - sheet.offsetTop + 16;
       board.style.setProperty("--pt", Math.ceil(below / 32) * 32 + "px");
     };
-    img.addEventListener("load", fitTop);
+    top.querySelector("img").addEventListener("load", fitTop);
     addEventListener("resize", fitTop);
   }
   if (p2) sheet.append(polaroid(p2, "b1"));
   if (p3) {
-    const b2 = polaroid(p3, "b2");
-    stk(b2, "bow", { top: "-30px", left: "50%", width: "64px", marginLeft: "-32px", transform: "rotate(6deg)" });
-    sheet.append(b2);
+    const strip = plainPhoto(p3, "strip");
+    stk(strip, "bow", { top: "-28px", left: "50%", width: "60px", marginLeft: "-30px", transform: "rotate(6deg)" });
+    sheet.append(strip);
   }
+}
+
+// ảnh hiện trọn theo tỉ lệ gốc, không khung polaroid
+function plainPhoto(p, cls) {
+  const fig = mk("figure", cls + " rv");
+  const img = mk("img");
+  img.src = p.src;
+  img.alt = p.caption || "";
+  fig.append(img);
+  return fig;
 }
 
 // hiện dần lên khi phong bì mở
