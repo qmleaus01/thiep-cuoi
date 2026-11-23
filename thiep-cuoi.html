@@ -74,6 +74,8 @@ section{position:relative}
 .letter .sign{font-family:"Great Vibes",cursive;font-size:38px;line-height:1.2;color:var(--wine);margin-top:8px;text-align:right}
 
 /* kỷ niệm */
+/* cụm sticker thay cho tiêu đề phần ảnh */
+.deco{position:relative;height:120px;max-width:360px;margin:0 auto}
 .gallery{display:grid;grid-template-columns:1fr;gap:34px;margin-top:28px}
 .gallery figure{margin:0;position:relative}
 .gallery .frame{background:#fbf7f0 var(--grain);padding:10px;box-shadow:0 2px 4px rgba(0,0,0,.12),0 16px 30px -10px rgba(60,15,20,.35)}
@@ -123,8 +125,7 @@ body:not(.music-on) #music{opacity:.65}
 
   <section class="dark">
     <div class="wrap">
-      <h2 class="script h2 rv">Kỷ niệm</h2>
-      <div class="rule rv"></div>
+      <div class="deco" id="deco" aria-hidden="true"></div>
       <div class="gallery" id="gallery"></div>
     </div>
   </section>
@@ -212,8 +213,11 @@ function render() {
   stk(L, "bow", { top: "54px", right: "6%", width: "72px", transform: "rotate(8deg)" });
   stk(L, "heart-pink", { bottom: "38px", left: "8%", width: "62px", transform: "rotate(-8deg)" });
   stk(L, "hearts3", { bottom: "30px", right: "8%", width: "92px", transform: "rotate(6deg)" });
-  stk(G, "camera", { top: "46px", left: "6%", width: "70px", transform: "rotate(-10deg)" });
-  stk(G, "sparkle", { top: "58px", right: "8%", width: "44px" });
+  const D = $("#deco");
+  stk(D, "heart-loop", { top: "34px", left: "0", width: "86px", transform: "rotate(-8deg)" });
+  stk(D, "roses", { top: "0", left: "50%", width: "96px", marginLeft: "-48px", transform: "rotate(-4deg)" });
+  stk(D, "star", { top: "6px", left: "63%", width: "40px", transform: "rotate(14deg)" });
+  stk(D, "plane", { top: "40px", right: "0", width: "84px", transform: "rotate(6deg)" });
   stk(G, "cherry", { bottom: "14px", right: "8%", width: "58px", transform: "rotate(10deg)" });
 }
 
