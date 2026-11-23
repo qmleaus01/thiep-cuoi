@@ -56,32 +56,21 @@ img{max-width:100%}
 section{padding:72px 24px;text-align:center}
 .wrap{max-width:560px;margin:0 auto}
 .dark{background:var(--wine) var(--grain);color:var(--cream)}
-.caps{text-transform:uppercase;letter-spacing:.3em;font-size:13px;font-weight:600}
 .script{font-family:"Great Vibes",cursive;font-weight:400;line-height:1.05}
 .h2{font-size:54px;margin:0 0 12px}
 .rule{width:120px;height:1px;margin:18px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent);position:relative}
 .rule::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;background:var(--gold);transform:rotate(45deg)}
 
-/* phần đầu */
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;padding-top:56px;padding-bottom:56px;background-image:var(--grain),radial-gradient(ellipse 90% 60% at 50% 30%,#6a222a,var(--wine) 55%,var(--wine-dark))}
-.names{font-size:clamp(46px,14vw,72px);margin:10px 0 4px}
-.names span{display:block}
-.names .amp{font-size:.6em;opacity:.7;margin:-.15em 0}
-.hero .date{font-size:22px;letter-spacing:.25em;font-weight:500}
-.arch{width:min(70vw,300px);aspect-ratio:3/4;margin:26px auto 8px;padding:8px;border:1px solid rgba(232,217,195,.45);border-radius:999px 999px 6px 6px}
-.scroll{margin-top:20px;font-size:12px;letter-spacing:.3em;text-transform:uppercase;opacity:.75;animation:bob 2s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(6px)}}
-
 /* ô ảnh: chưa có file thì hiện chữ "thêm ảnh" */
 .ph{position:relative;overflow:hidden;width:100%;height:100%;display:grid;place-items:center;background:var(--grain),linear-gradient(145deg,#e4dbcc,#cdbfa9);border-radius:inherit}
 .ph::before{content:"thêm ảnh";font-style:italic;color:#8d7b68}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(.96)}
-.arch .ph{border-radius:999px 999px 2px 2px}
 
-/* lời chúc */
+/* lời chúc: phần đầu tiên hiện ra sau phong bì */
+.letter{padding-top:96px}
 .letter .to{font-style:italic;font-weight:500;font-size:22px;margin-bottom:14px}
-.letter .msg{margin:0 0 16px}
-.letter .sign{font-family:"Great Vibes",cursive;font-size:44px;color:var(--wine);margin-top:8px}
+.letter .msg{margin:0 0 16px;text-align:left}
+.letter .sign{font-family:"Great Vibes",cursive;font-size:38px;line-height:1.2;color:var(--wine);margin-top:8px;text-align:right}
 
 /* kỷ niệm */
 .gallery{display:grid;grid-template-columns:1fr;gap:34px;margin-top:28px}
@@ -89,17 +78,6 @@ section{padding:72px 24px;text-align:center}
 .gallery .frame{aspect-ratio:4/5;background:#fbf7f0 var(--grain);padding:10px;box-shadow:0 2px 4px rgba(0,0,0,.12),0 16px 30px -10px rgba(60,15,20,.35)}
 .gallery figcaption{margin-top:12px;font-style:italic;font-weight:500}
 @media (min-width:600px){.gallery{grid-template-columns:1fr 1fr}}
-
-/* ngày cưới */
-.day{font-size:110px;line-height:1;font-weight:500;color:var(--wine)}
-.day.raw{font-size:54px}
-.time{font-size:34px;font-weight:600;margin-top:6px}
-.place{font-style:italic;font-size:22px;margin-top:6px}
-.map{display:inline-block;margin-top:22px;padding:12px 26px;border:1px solid rgba(92,26,32,.5);border-radius:99px;color:var(--wine);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.25em;text-transform:uppercase}
-
-/* cuối trang */
-.end .script{font-size:clamp(38px,11vw,52px)}
-.end .from{margin-top:10px}
 
 /* hiện dần khi cuộn tới */
 .rv{opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease}
@@ -129,14 +107,6 @@ body:not(.music-on) #music{opacity:.65}
 </div>
 
 <main>
-  <section class="hero dark">
-    <p class="caps rv">mừng ngày cưới</p>
-    <h1 class="script names rv" id="names"></h1>
-    <p class="date rv" id="hero-date"></p>
-    <div class="arch rv" id="cover"></div>
-    <p class="scroll">kéo xuống ↓</p>
-  </section>
-
   <section class="letter">
     <div class="wrap" id="letter">
       <h2 class="script h2 rv">Lời chúc</h2>
@@ -152,21 +122,6 @@ body:not(.music-on) #music{opacity:.65}
       <div class="gallery" id="gallery"></div>
     </div>
   </section>
-
-  <section>
-    <div class="wrap" id="when">
-      <h2 class="script h2 rv" style="color:var(--wine)">Hẹn gặp nhau</h2>
-      <div class="rule rv"></div>
-    </div>
-  </section>
-
-  <section class="end dark">
-    <div class="wrap">
-      <p class="script rv">Trăm năm hạnh phúc</p>
-      <div class="rule rv"></div>
-      <p class="caps from rv" id="from"></p>
-    </div>
-  </section>
 </main>
 
 <button id="music" type="button" aria-label="Tắt nhạc" hidden>
@@ -177,19 +132,19 @@ body:not(.music-on) #music{opacity:.65}
 <script>
 /* ===== CHỈNH NỘI DUNG Ở ĐÂY ===== */
 const CONFIG = {
-  couple: "Tên cô dâu & Tên chú rể",
-  date: "00.00.2026",
+  couple: "Tên cô dâu & Tên chú rể", // chỉ dùng cho chữ cái trên con dấu và tên tab
   music: "nhac.mp3", // đặt file nhạc cạnh file này; để "" nếu không dùng nhạc
-  cover: { src: "anh/bia.jpg", caption: "Chúng mình" }, // ảnh lớn ở đầu trang
-  to: "Gửi nyc của anh,",
+  to: "Hello, xin là xin chúc mừng gia đình nhé.",
   message: [
-    "Hôm nay em bước vào một chương mới, anh mừng vì em đã tìm được người làm em thấy hạnh phúc nhất.",
-    "Chúc hai vợ chồng luôn yêu thương, thấu hiểu nhau và cùng nhau đi hết chặng đường phía trước.",
+    "Finally finally finally, you found someone who loves you. I mean, vừa cái mắt của mày, can bao dung cái nết của mày, and hopefully he did heal your freaking nhạy cảm soul :)))",
+    "Anyway, looking back, we’ve both hurt each other in some pretty fucked-up ways. I was really mad at you, and even your cousin, for a while. But I guess it’s time to let all that shit go. I’m sorry for the things I did, and thank you for all the good times and everything you did for me. At the end of the day, we were both just being stubborn little shits, so I hope we can just forgive each other and move on.",
+    "Sometimes I think you’re just being insane, simply a chilenlen so whatever, I’ll let it slide :)))",
+    "When I found out you had a boyfriend, I was genuinely happy for you. Also kinda funny that someone finally came along and made you trust them, lean on them, and fall in love. Like, wow, who would’ve thought :)))",
+    "But fr, I’m really happy for you both. I hope you’ll always have someone to lean on, someone who gets you, and someone who loves you even when you’re being a pain in the ass. Đẹp mặt anh chị rùi.",
+    "Tấm lòng của t xin phép gửi gắm qua chị Linh thân iu nhé :))) Ah btw, honestly, thanks to you, I got to meet anh Việt, chị Linh, and now the super cute little Hana too :)))",
+    "Congrats again, you two. ❤️",
   ],
-  from: "lenavtung",
-  time: "17:30",
-  place: "Địa điểm tổ chức, địa chỉ",
-  mapUrl: "", // dán link Google Maps nếu có, để trống nếu không
+  from: "maile with nothing", // chữ ký: "From maile with nothing."
   photos: [
     // Đặt ảnh vào thư mục "anh" cạnh file này. Thêm bao nhiêu ảnh cũng được, mỗi dòng một ảnh.
     { src: "anh/1.jpg", caption: "Ngày đầu gặp nhau" },
@@ -218,32 +173,16 @@ const photoBox = p => {
   return box;
 };
 
-const WEEKDAYS = ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"];
-// "dd.mm.yyyy" -> các phần để hiển thị; ngày không hợp lệ trả về null
-function parseDate(s) {
-  const [d, m, y] = String(s).split(".").map(Number);
-  const dt = new Date(y, m - 1, d);
-  if (!y || dt.getFullYear() !== y || dt.getMonth() !== m - 1 || dt.getDate() !== d) return null;
-  return { day: String(d).padStart(2, "0"), month: "Tháng " + m, weekday: WEEKDAYS[dt.getDay()], year: String(y) };
-}
-console.assert(parseDate("00.00.2026") === null && parseDate("24.08.2026").weekday === "Thứ hai", "parseDate lỗi");
-
 function render() {
   const [n1, n2 = ""] = CONFIG.couple.split("&").map(s => s.trim());
   const initial = s => (s.split(/\s+/).pop() || "").charAt(0).toUpperCase();
   document.title = "Thiệp cưới · " + CONFIG.couple;
   $("#mono").textContent = n2 ? initial(n1) + "&" + initial(n2) : initial(n1);
 
-  const names = $("#names");
-  names.append(mk("span", "", n1));
-  if (n2) names.append(mk("span", "amp", "&"), mk("span", "", n2));
-  $("#hero-date").textContent = CONFIG.date;
-  $("#cover").append(photoBox(CONFIG.cover));
-
   const letter = $("#letter");
   $("#to").textContent = CONFIG.to;
   CONFIG.message.forEach(t => letter.append(mk("p", "msg rv", t)));
-  letter.append(mk("p", "sign rv", CONFIG.from));
+  letter.append(mk("p", "sign rv", "From " + CONFIG.from + "."));
 
   const gallery = $("#gallery");
   CONFIG.photos.forEach(p => {
@@ -253,20 +192,6 @@ function render() {
     fig.append(frame, mk("figcaption", "", p.caption));
     gallery.append(fig);
   });
-
-  const pd = parseDate(CONFIG.date), when = $("#when");
-  if (pd) when.append(mk("p", "caps rv", pd.month + " · " + pd.year));
-  when.append(mk("p", "day rv" + (pd ? "" : " raw"), pd ? pd.day : CONFIG.date));
-  if (pd) when.append(mk("p", "caps rv", pd.weekday));
-  when.append(mk("p", "time rv", CONFIG.time), mk("p", "place rv", CONFIG.place));
-  if (CONFIG.mapUrl) {
-    const a = mk("a", "map rv", "Xem bản đồ");
-    a.href = CONFIG.mapUrl;
-    a.target = "_blank";
-    a.rel = "noopener";
-    when.append(a);
-  }
-  $("#from").textContent = "thương, " + CONFIG.from;
 }
 
 // Khối nào cuộn tới thì hiện dần lên
